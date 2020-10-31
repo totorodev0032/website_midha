@@ -1,0 +1,22 @@
+{
+  "name": "midha_website",
+  "version": "1.0.0",
+  "description": "Live class coding platform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/totorodev0032/website_midha.git"
+  },
+  "author": "Nagendra kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/totorodev0032/website_midha/issues"
+  },
+  "homepage": "https://github.com/totorodev0032/website_midha#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
