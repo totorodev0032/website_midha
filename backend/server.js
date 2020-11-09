@@ -1,10 +1,13 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
+const connectDB = require('./config/db');
 const app = express();
 const courses = require('./data/courses');
 
 dotenv.config();
+
+connectDB()
 
 app.get('/', (req,res) => {
     res.send('hello')
