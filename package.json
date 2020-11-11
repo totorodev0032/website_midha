@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/totorodev0032/website_midha#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
