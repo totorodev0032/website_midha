@@ -14,7 +14,7 @@ router.get("/:id", asyncHandler(async(req,res)=> {
  const requestedCourseId = req.params.id;  
  const course = await Course.findById(requestedCourseId);
  if(course){
-     res.json(course)
+     res.status(200).json(course)
  }else{
     res.status(404).json({});
  }
