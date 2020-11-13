@@ -1,13 +1,13 @@
 const express = require('express');
-const {Router} = require('express');
+const router = express.Router();
 const Course = require('../models/courseModel');
 const asyncHandler = require('express-async-handler');
 
-const router = Router();
+
 
 router.get("/", asyncHandler(async(req,res) =>{
   const courses = await Course.find({})
-  res.json(courses);
+  res.status(200).json(courses);
 }));
 
 router.get("/:id", asyncHandler(async(req,res)=> {

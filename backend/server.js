@@ -16,17 +16,6 @@ app.get('/', (req,res) => {
     res.send('hello')
 })
 
-//routes for all courses
-app.get('/courses', (req,res) => {
-    res.json(courses)
-})
-
-app.get('/courses/id', (req, res) => {
-    const course = courses.find(course => course._id === req.params.id)
-    res.json(course)
-});
-
-
 
 PORT = process.env.PORT;
 
