@@ -4,10 +4,13 @@ const colors = require('colors');
 const connectDB = require('./config/db');
 const app = express();
 const courses = require('./data/courses');
+const courseRoutes = require('./routes/courseRoutes');
 
 dotenv.config();
 
 connectDB()
+
+app.use('/api/courses', courseRoutes);
 
 app.get('/', (req,res) => {
     res.send('hello')
@@ -21,7 +24,9 @@ app.get('/courses', (req,res) => {
 app.get('/courses/id', (req, res) => {
     const course = courses.find(course => course._id === req.params.id)
     res.json(course)
-} );
+});
+
+
 
 PORT = process.env.PORT;
 
