@@ -1,25 +1,29 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/UserModel');
-
-const requireAuth = (req,res,next) => {
-    const token = req.cookies.jwt;
+const asyncHandler = require('express-async-handler');
 
 // json web token is verified
-    if(token){
-        jwt.verify(token, 'course',(err, decodedToken) =>{
-          if(err){
-              console.log(err.message);
-              res.redirect('/signin');
-          }
-          else{
-              console.log(decodedToken);
-              next();
-          }
-        });
+const requireAuth = asyncHandler(async (req,res,next) => {
+    let token;
+    if(
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) try{
+        token = req.headers.authorization.split(' ')[1].toString();
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = await User.findById(decodedToken.id).select('-password');
+        next();
+    } 
+    catch(error){
+        console.error(error);
+      res.status(401);
+      throw new Error('not authorized, no token');
     }
-    else{
-        res.redirect('/signin');
+    if(!token){
+        res.status(401);
+        throw new Error('not authorized, no token');
     }
-}
+});
+
 
 module.exports = requireAuth;
