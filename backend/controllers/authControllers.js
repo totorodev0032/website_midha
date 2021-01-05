@@ -68,10 +68,8 @@ module.exports.signup_post  = async (req,res) => {
 }
 
 module.exports.signin_post = async (req,res) => {
-    const {email, password} = req.body;
-
-    try{
-        const{email, password} = req.body;
+    const{email, password} = req.body;
+        try{
         const user = await User.signin(email,password);
         res.status(201);
         res.json({
@@ -85,4 +83,24 @@ module.exports.signin_post = async (req,res) => {
          const errors = handleErrors(err);
          res.status(400).json({errors});
       }
+}
+
+module.exports.getUser = async (req,res) => {
+    try{
+    const user = await User.findById(req.user._id);
+    if(user) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+        });
+    }
+    else{
+        res.status(404);
+        throw new Error('user not found');
+    }
+    }
+    catch(err){
+        console.log(err);
+    }
 }
